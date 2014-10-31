@@ -1,13 +1,6 @@
 var links = [];
 var casper = require('casper').create({verbose: true, logLevel:"debug"});
 
-function getLinks() {
-    var links = document.querySelectorAll('h3.r a');
-    return Array.prototype.map.call(links, function(e) {
-        return e.getAttribute('href');
-    });
-}
-
 casper.start('https://libreserviceprepaye.koodomobile.com/', function() {
     this.fill('form[action=""]', { 
         'ctl00$FullContent$ContentBottom$LoginControl$UserName': '', 
