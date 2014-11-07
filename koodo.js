@@ -1,5 +1,6 @@
 var links = [];
-var casper = require('casper').create({verbose: true, logLevel:"debug"});
+var casper = require('casper').create({verbose: false, logLevel:"debug"});
+var fs = require('fs');
 
 casper.start('https://libreserviceprepaye.koodomobile.com/', function() {
     this.fill('form[action=""]', { 
@@ -12,7 +13,6 @@ casper.start('https://libreserviceprepaye.koodomobile.com/', function() {
 
 casper.then(function() {
     this.wait(2000, function() {
-        this.echo("I've waited for a second.");
         this.capture('koodo-s1.png', {
             top: 0,
             left: 0,
@@ -29,6 +29,16 @@ casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-d
         width: 1000,
         height: 1000
     });
+
+    
+    var dataRemaining = this.evaluate(function () {
+        return $('#DataRemainingLiteral').text();
+    })
+
+    
+    var values = { dataRemaining : dataRemaining};
+    casper.log('this is a debug message', values);
+    fs.write('usage.json', JSON.stringify(values));
 });
 
 casper.run(function() {});
