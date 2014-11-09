@@ -2,3 +2,5 @@ node_modules/
 koodo-s1.png
 koodo-s2.png
 usage.json
+config/config.json
+results/
