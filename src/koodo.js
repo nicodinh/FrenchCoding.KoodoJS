@@ -59,14 +59,18 @@ casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-d
                 usedMinutes : $('.crossservice-panel tr:eq(2) .used span').text().trim(),
                 remainingMinutes : $('.crossservice-panel tr:eq(2) .remaining span').text().trim(),
                 startDate : $('.crossservice-panel tr:eq(2) .startDate').text().trim(),
+            },
+            meta : {
+                timestamp: new Date().toString()
             }
+
         };
         return usage;
     });
     
     var jsonobject = JSON.stringify(dataRemaining);
     var date = new Date();
-    fs.write('results/usage-'+ date.getFullYear() + "." + date.getMonth() + "." + date.getDay() + "." + date.getSeconds()  + '.json', jsonobject);
+    fs.write('results/usage-'+ date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate() + "." + date.getHours() + "." + date.getMinutes() + "." + date.getSeconds() + '.json', jsonobject);
     this.echo("usage saved to disk");
     this.echo("done!");
 });

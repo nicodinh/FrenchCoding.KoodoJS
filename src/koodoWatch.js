@@ -4,7 +4,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 watch.createMonitor('results', function (monitor) {
-    monitor.files['results/'] // Stat object for my zshrc.
+    monitor.files['/results/'] // Stat object for my zshrc.
     monitor.on("created", function (f, stat) {
         console.log("new file - " + f);
         fs.readFile(f, function (err, data) {
@@ -17,6 +17,11 @@ watch.createMonitor('results', function (monitor) {
                 //db.close();
                 insertDocuments(db, function() {
                     db.close();
+
+                    fs.unlink(f, function (err) {
+                      if (err) throw err;
+                      console.log('successfully deleted ' + f);
+                    });
                 });
             });
 
@@ -25,7 +30,7 @@ watch.createMonitor('results', function (monitor) {
                 var collection = db.collection('documents');
                 // Insert some documents
                 collection.insert(data, function(err, result) {
-                    console.log("Inserted document into the document collection");
+                    console.log(new Date().toString() + " - Inserted document into the document collection");
                     callback(result);
                 });
             }
