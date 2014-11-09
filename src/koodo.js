@@ -5,18 +5,19 @@ var fs = require('fs');
 casper.start('https://libreserviceprepaye.koodomobile.com/', function() {
     this.echo("Job started");
     var configFile = fs.read("config/config.json");
-    //this.echo(configFile);
     var config = JSON.parse(configFile);
-    //this.echo(config);
+    this.echo("Config ready");
     this.fill('form[action=""]', { 
         'ctl00$FullContent$ContentBottom$LoginControl$UserName': config.username, 
         'ctl00$FullContent$ContentBottom$LoginControl$Password': config.password 
     }, false);
 
     this.mouseEvent('click', 'input[id="FullContent_ContentBottom_LoginControl_LoginButton"]');
+    this.echo("Form POST done");
 });
 
 casper.then(function() {
+    this.echo("Waiting for postback... (2 seconds)")
     this.wait(2000, function() {
         // this.capture('koodo-s1.png', {
         //     top: 0,
@@ -24,10 +25,11 @@ casper.then(function() {
         //     width: 1000,
         //     height: 1000
         // });
-    });    
+    });
 });
 
 casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-de-base-et-a-cotes/Afficher-l-utilisation/', function() {
+    this.echo("We're in!")
     // this.capture('koodo-s2.png', {
     //     top: 0,
     //     left: 0,
