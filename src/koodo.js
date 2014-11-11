@@ -18,25 +18,11 @@ casper.start('https://libreserviceprepaye.koodomobile.com/', function() {
 
 casper.then(function() {
     this.echo("Waiting for postback... (2 seconds)")
-    this.wait(2000, function() {
-        // this.capture('koodo-s1.png', {
-        //     top: 0,
-        //     left: 0,
-        //     width: 1000,
-        //     height: 1000
-        // });
-    });
+    this.wait(2000, function() { });
 });
 
 casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-de-base-et-a-cotes/Afficher-l-utilisation/', function() {
     this.echo("We're in!")
-    // this.capture('koodo-s2.png', {
-    //     top: 0,
-    //     left: 0,
-    //     width: 1000,
-    //     height: 1000
-    // });
-
     var dataRemaining = this.evaluate(function () {
         var usage = { 
             data : {
@@ -76,46 +62,3 @@ casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-d
 });
 
 casper.run(function() {});
-
-/*
-=Data=
-
-bundleName 
-    $('.data-panel .table-data.bundleName')
-DataAllowanceLiteral
-    $('#DataAllowanceLiteral')
-DataUsedLiteral
-    $('DataUsedLiteral')
-DataRemainingLiteral
-    $('DataRemainingLiteral')
-Start Date
-    $('.data-panel .table-data.startDate')
-
-Minutes #1
-Nom du service
-    $('.crossservice-panel tr:eq(1) .bundleName')
-Minutes
-    $('.crossservice-panel tr:eq(1) .allowance span').text()
-Minutes utilisées
-    $('.crossservice-panel tr:eq(1) .used span').text()
-Minutes restantes
-    $('.crossservice-panel tr:eq(1) .remaining span').text()
-Date de début
-    $('.crossservice-panel tr:eq(1) .startDate')
-
-Minutes #2
-Nom du service
-    $('.crossservice-panel tr:eq(2) .bundleName')
-Minutes
-    $('.crossservice-panel tr:eq(2) .allowance span').text()
-Minutes utilisées
-    $('.crossservice-panel tr:eq(2) .used span').text()
-Minutes restantes
-    $('.crossservice-panel tr:eq(2) .remaining span').text()
-Date de début
-    $('.crossservice-panel tr:eq(2) .startDate')
-
-
-
-
-*/

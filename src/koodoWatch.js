@@ -4,7 +4,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 watch.createMonitor('results', function (monitor) {
-    monitor.files['/results/'] // Stat object for my zshrc.
+    monitor.files['/results/']
     monitor.on("created", function (f, stat) {
         console.log("new file - " + f);
         fs.readFile(f, function (err, data) {
@@ -14,7 +14,7 @@ watch.createMonitor('results', function (monitor) {
             MongoClient.connect(url, function(err, db) {
                 assert.equal(null, err);
                 console.log("Connected correctly to server");
-                //db.close();
+                
                 insertDocuments(db, function() {
                     db.close();
 
@@ -26,9 +26,7 @@ watch.createMonitor('results', function (monitor) {
             });
 
             var insertDocuments = function(db, callback) {
-                // Get the documents collection
                 var collection = db.collection('documents');
-                // Insert some documents
                 collection.insert(data, function(err, result) {
                     console.log(new Date().toString() + " - Inserted document into the document collection");
                     callback(result);
