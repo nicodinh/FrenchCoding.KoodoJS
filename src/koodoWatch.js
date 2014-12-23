@@ -14,20 +14,20 @@ watch.createMonitor('results', function (monitor) {
             MongoClient.connect(url, function(err, db) {
                 assert.equal(null, err);
                 console.log("Connected correctly to server");
-                
-                insertDocuments(db, function() {
+
+                insertDocuments(db, data, function() {
                     db.close();
 
-                    fs.unlink(f, function (err) {
-                      if (err) throw err;
-                      console.log('successfully deleted ' + f);
-                    });
+                    // fs.unlink(f, function (err) {
+                    //   if (err) throw err;
+                    //   console.log('successfully deleted ' + f);
+                    // });
                 });
             });
 
-            var insertDocuments = function(db, callback) {
+            var insertDocuments = function(db, dataToInsert, callback) {
                 var collection = db.collection('documents');
-                collection.insert(data, function(err, result) {
+                collection.insert(dataToInsert, function(err, result) {
                     console.log(new Date().toString() + " - Inserted document into the document collection");
                     callback(result);
                 });

@@ -27,23 +27,23 @@ casper.thenOpen('https://libreserviceprepaye.koodomobile.com/fr/Apercu/Forfait-d
         var usage = { 
             data : {
                 dataBundleName : $('.data-panel .table-data.bundleName').text().trim(),
-                dataAllowance : $('#DataAllowanceLiteral').text().trim(),
-                dataUsed : $('#DataUsedLiteral').text().trim(),
-                dataRemaining : $('#DataRemainingLiteral').text().trim(),
+                dataAllowance : parseFloat($('#DataAllowanceLiteral').text().trim()),
+                dataUsed : parseFloat($('#DataUsedLiteral').text().trim()),
+                dataRemaining : parseFloat($('#DataRemainingLiteral').text().trim()),
                 startDate : $('.data-panel .table-data.startDate').text().trim()
             },
             Minutes1 : {
                 serviceName : $('.crossservice-panel tr:eq(1) .bundleName').text().trim(),
-                totalMinutes : $('.crossservice-panel tr:eq(1) .allowance span').text().trim(),
-                usedMinutes : $('.crossservice-panel tr:eq(1) .used span').text().trim(),
-                remainingMinutes : $('.crossservice-panel tr:eq(1) .remaining span').text().trim(),
+                totalMinutes : parseInt($('.crossservice-panel tr:eq(1) .allowance span').text().trim()),
+                usedMinutes : parseInt($('.crossservice-panel tr:eq(1) .used span').text().trim()),
+                remainingMinutes : parseInt($('.crossservice-panel tr:eq(1) .remaining span').text().trim()),
                 startDate : $('.crossservice-panel tr:eq(1) .startDate').text().trim(),
             },
             Minutes2 : {
                 serviceName : $('.crossservice-panel tr:eq(2) .bundleName').text().trim(),
-                totalMinutes : $('.crossservice-panel tr:eq(2) .allowance span').text().trim(),
-                usedMinutes : $('.crossservice-panel tr:eq(2) .used span').text().trim(),
-                remainingMinutes : $('.crossservice-panel tr:eq(2) .remaining span').text().trim(),
+                totalMinutes : parseInt($('.crossservice-panel tr:eq(2) .allowance span').text().trim()),
+                usedMinutes : parseInt($('.crossservice-panel tr:eq(2) .used span').text().trim()),
+                remainingMinutes : parseInt($('.crossservice-panel tr:eq(2) .remaining span').text().trim()),
                 startDate : $('.crossservice-panel tr:eq(2) .startDate').text().trim(),
             },
             meta : {
